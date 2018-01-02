@@ -114,36 +114,6 @@ public class ECommerce_MemberEditProfileServlet extends HttpServlet {
         return member;
     }
     
-    public boolean updateMember (String name,String email, String phone, String country, String address, String securityQuestion, String securityAnswer,
-            String age,String income, String passwordSalt, String passwordHash)
-    {
-        Client client = ClientBuilder.newClient();
-
-        WebTarget target = client
-                .target("http://localhost:8080/IS3102_WebService-Student/webresources/entity.memberentity").path("updateMember");
-        Form forms = new Form();
-        forms.param("name", name);
-        forms.param("email", email);
-        forms.param("phone", phone);
-        forms.param("country", country);
-        forms.param("address", address);
-        forms.param("securityQuestion", securityQuestion);
-        forms.param("securityAnswer", securityAnswer);
-        forms.param("age", age);
-        forms.param("income", income);
-        forms.param("passwordSalt", passwordSalt);
-        forms.param("passwordHash", passwordHash);
-     
-        Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON);
-        Response response = invocationBuilder.post(Entity.entity(forms, MediaType.APPLICATION_FORM_URLENCODED));
-        System.out.println("status: " + response.getStatus());
-
-     
-           if (response.getStatus() != 200) {
-            return false;
-        }
-        return true;
-    }
     
     public String generatePasswordSalt() {
         byte[] salt = new byte[16];
